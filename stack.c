@@ -7,9 +7,14 @@ struct stack{
 };
 struct stack s;
 void push(int new_data){//insert new data to top of stack
-	s.top++;
-	s.data[s.top] = new_data;
-	return;
+	if(s.top == MAXSIZE-1){
+		printf("Stack is full cannot add anymore items");
+		return;
+	}else{
+		s.top++;
+		s.data[s.top] = new_data;
+		return;
+	}
 }
 int pop(){//remove item from top
 	int num;

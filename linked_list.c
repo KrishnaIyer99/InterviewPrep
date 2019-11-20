@@ -58,6 +58,7 @@ void delete(struct Node** head_ref, int position){
 		}
 		temp->next = temp->next->next;
 		free(temp->next);
+		return;
 	}
 }
 			
@@ -82,7 +83,7 @@ int main(){
 	printList(head);
 	push(3, 0, &head);//7 85 6 0 23
 	printList(head);
-	delete(&head, 2);
+	delete(&head, 2);//7 85 0 23
 	printList(head);
 	return 0;
 }

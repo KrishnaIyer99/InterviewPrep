@@ -26,7 +26,7 @@ void push(int position, int new_data, struct Node** head_ref){//insert at tail w
 	}
 	else if(position == -1){
 		struct Node* temp = *head_ref;
-		while(temp != NULL){
+		while(temp->next != NULL){
 			temp = temp->next;
 		}
 		temp->next = new;
@@ -43,12 +43,46 @@ void push(int position, int new_data, struct Node** head_ref){//insert at tail w
 	}
 			
 }
+void delete(struct Node** head_ref, int position){
+	struct Node* temp = *head_ref;
+	if(*head_ref == NULL){
+		printf("Empty list, there are no nodes");
+		return;
+	}else if(position == 0){//delete head node
+		*head_ref = temp->next;
+		free(temp);
+		return;
+	}else{
+		for(int i = 0; i < position - 1; i++){
+			temp = temp->next;
+		}
+		temp->next = temp->next->next;
+		free(temp->next);
+	}
+}
+			
+
 int main(){
 	struct Node* head = NULL;
 	push(0, 7, &head);//7
+	printList(head);
 	push(0, 35, &head);//35 7
-	push(1, 12, &head);//35 12 7
-	push(2, 85, &head);// 35 12 85 7
+	printList(head);
+	push(-1, 12, &head);//35 7 12
+	printList(head);
+	push(2, 85, &head);// 35 7 85 12
+	printList(head);
+	delete(&head, 0);//7 85 12
+	printList(head);
+	delete(&head, 2);//7 85
+	printList(head);
+	push(-1, 6, &head);//7 85 6
+	printList(head);
+	push(-1, 23, &head);//7 85 6 23
+	printList(head);
+	push(3, 0, &head);//7 85 6 0 23
+	printList(head);
+	delete(&head, 2);
 	printList(head);
 	return 0;
 }
